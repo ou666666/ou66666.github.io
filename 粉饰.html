@@ -1,0 +1,1794 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>大元梦 - 消亡前的传说</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#8B4513',      // 深棕色（古风主色）
+            secondary: '#D2B48C',    // 浅棕色
+            accent: '#CD853F',       // 秘鲁色
+            dark: '#2D2327',         // 深褐色
+            light: '#F5F5DC',        // 米色
+          },
+          fontFamily: {
+            serif: ['"Noto Serif SC"', 'serif'],
+            kai: ['"KaiTi"', 'STKaiti', 'serif'],
+          },
+          backgroundImage: {
+            'paper-texture': "url('https://picsum.photos/id/318/1920/1080')",
+            'ancient-pattern': "url('https://picsum.photos/id/175/1920/1080')",
+          }
+        },
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+            .text-shadow {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            }
+            .bg-blur {
+                backdrop-filter: blur(8px);
+            }
+            .scrollbar-hide::-webkit-scrollbar {
+                display: none;
+            }
+            .scrollbar-thin::-webkit-scrollbar {
+                width: 4px;
+            }
+            .scrollbar-thin::-webkit-scrollbar-thumb {
+                background-color: rgba(139, 69, 19, 0.3);
+                border-radius: 2px;
+            }
+        }
+    </style>
+  <!-- 引入中文字体 -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* 正文默认字体大小（已调整为15px） */
+    .prose {
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* 人物介绍板块字体缩小 */
+    #characters h2 {
+      font-size: clamp(1.6rem, 2.5vw, 2.2rem) !important;
+    }
+
+    #characters h3 {
+      font-size: 1.1rem !important;
+      font-weight: 600 !important;
+    }
+
+    #characters p,
+    #characters span,
+    #characters li {
+      font-size: 0.9rem !important;
+    }
+
+    #characters .text-sm {
+      font-size: 0.85rem !important;
+    }
+
+    /* 世界观板块字体缩小 */
+    #world h2 {
+      font-size: clamp(1.6rem, 2.5vw, 2.2rem) !important;
+    }
+
+    #world h3 {
+      font-size: 1.1rem !important;
+      font-weight: 600 !important;
+    }
+
+    #world h4 {
+      font-size: 1rem !important;
+      font-weight: 600 !important;
+    }
+
+    #world p,
+    #world span,
+    #world li {
+      font-size: 0.9rem !important;
+    }
+
+    #world .text-xs {
+      font-size: 0.8rem !important;
+    }
+
+    /* 关于作品板块字体缩小 */
+    #about h2 {
+      font-size: clamp(1.6rem, 2.5vw, 2.2rem) !important;
+    }
+
+    #about h3 {
+      font-size: 1.1rem !important;
+      font-weight: 600 !important;
+    }
+
+    #about p,
+    #about li,
+    #about span {
+      font-size: 0.9rem !important;
+    }
+
+    /* 阅读进度板块字体缩小 */
+    .mt-8.bg-white\/70 p {
+      font-size: 0.85rem !important;
+    }
+
+    .mt-8.bg-white\/70 button {
+      font-size: 0.9rem !important;
+      padding: 0.4rem 0.8rem !important;
+    }
+
+    /* 字体大小切换按钮调整 */
+    .fixed.top-24.right-4 {
+      font-size: 0.85rem !important;
+      padding: 0.3rem 0.6rem !important;
+    }
+  </style>
+</head>
+
+<body class="bg-light font-serif text-dark min-h-screen">
+  <!-- 顶部导航栏 -->
+  <header class="sticky top-0 z-50 bg-primary/90 bg-blur text-light shadow-lg transition-all duration-300">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <<i class="fa fa-book text-2xl text-secondary">
+          </< /i>
+          <h1 class="text-xl md:text-2xl font-bold tracking-wide">大元梦</h1>
+          <span class="hidden md:inline-block text-xs px-2 py-1 bg-secondary/20 rounded-full">消亡前的传说</span>
+      </div>
+
+      <!-- 桌面导航 -->
+      <nav class="hidden md:flex space-x-6">
+        <a href="#home" class="hover:text-secondary transition-colors duration-200">首页</a>
+        <a href="#story" class="hover:text-secondary transition-colors duration-200">小说正文</a>
+        <a href="#characters" class="hover:text-secondary transition-colors duration-200">人物介绍</a>
+        <a href="#world" class="hover:text-secondary transition-colors duration-200">世界观</a>
+        <a href="#about" class="hover:text-secondary transition-colors duration-200">关于作品</a>
+      </nav>
+
+      <!-- 移动端菜单按钮 -->
+      <button id="menuBtn" class="md:hidden text-light text-xl">
+        <<i class="fa fa-bars">
+          </< /i>
+      </button>
+    </div>
+
+    <!-- 移动端导航菜单 -->
+    <div id="mobileMenu" class="md:hidden bg-primary/95 bg-blur hidden">
+      <div class="container mx-auto px-4 py-2 flex flex-col space-y-3">
+        <a href="#home" class="py-2 hover:text-secondary transition-colors duration-200">首页</a>
+        <a href="#story" class="py-2 hover:text-secondary transition-colors duration-200">小说正文</a>
+        <a href="#characters" class="py-2 hover:text-secondary transition-colors duration-200">人物介绍</a>
+        <a href="#world" class="py-2 hover:text-secondary transition-colors duration-200">世界观</a>
+        <a href="#about" class="py-2 hover:text-secondary transition-colors duration-200">关于作品</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- 英雄区域 -->
+    <section id="home" class="relative h-[70vh] flex items-center justify-center overflow-hidden">
+      <div class="absolute inset-0 bg-ancient-pattern bg-cover bg-center opacity-20"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-primary/30 to-dark/50"></div>
+
+      <div class="container mx-auto px-4 z-10 text-center">
+        <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-bold text-light text-shadow mb-4 leading-tight">消亡前的大元梦</h2>
+        <p class="text-[clamp(1rem,2vw,1.2rem)] text-light/90 max-w-2xl mx-auto mb-8">
+          烟雾环绕，青山缠绕，三族交界之处的元村，两个少年的偶遇，
+          揭开了五百年前的惊天秘密，改变了整个王朝的命运轨迹
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+          <a href="#story"
+            class="bg-secondary hover:bg-secondary/90 text-dark font-semibold px-6 py-3 rounded-md transition-all duration-300 transform hover:scale-105 shadow-lg">
+            开始阅读 <<i class="fa fa-arrow-right ml-2">
+              </< /i>
+          </a>
+          <a href="#characters"
+            class="bg-transparent border-2 border-light/80 hover:border-light text-light font-semibold px-6 py-3 rounded-md transition-all duration-300 transform hover:scale-105">
+            认识角色 <<i class="fa fa-user-circle ml-2">
+              </< /i>
+          </a>
+        </div>
+      </div>
+
+      <div class="absolute bottom-8 left-0 right-0 flex justify-center animate-bounce">
+        <a href="#story" class="text-light/80 hover:text-light">
+          <<i class="fa fa-angle-down text-2xl">
+            </< /i>
+        </a>
+      </div>
+    </section>
+
+    <!-- 小说正文区域 -->
+    <section id="story" class="py-16 bg-light/80">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col lg:flex-row gap-8">
+          <!-- 章节列表 -->
+          <div class="lg:w-1/4">
+            <div class="bg-white/70 backdrop-blur rounded-lg shadow-md p-4 sticky top-24">
+              <h3 class="text-xl font-bold text-primary mb-4 pb-2 border-b border-secondary/30">
+                <<i class="fa fa-list-ul mr-2">
+                  </< /i>章节列表
+              </h3>
+              <div class="space-y-2 max-h-[60vh] overflow-y-auto scrollbar-thin pr-2">
+                <a href="#chapter-intro" class="block p-2 hover:bg-secondary/10 rounded transition-colors duration-200">
+                  <span class="inline-block w-6 text-center mr-2">序</span>不眠之夜
+                </a>
+                <a href="#chapter-1" class="block p-2 hover:bg-secondary/10 rounded transition-colors duration-200">
+                  <span class="inline-block w-6 text-center mr-2">1</span>秘境通道
+                </a>
+                <a href="#chapter-2" class="block p-2 hover:bg-secondary/10 rounded transition-colors duration-200">
+                  <span class="inline-block w-6 text-center mr-2">2</span>热情的小镇
+                </a>
+                <a href="#chapter-3" class="block p-2 hover:bg-secondary/10 rounded transition-colors duration-200">
+                  <span class="inline-block w-6 text-center mr-2">3</span>秀林镇遇练石少年
+                </a>
+                <div class="p-2 text-center text-gray-500 text-sm">
+                  更多章节持续更新中...
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 小说内容 -->
+          <div class="lg:w-3/4">
+            <div class="bg-white/90 backdrop-blur rounded-lg shadow-lg p-6 md:p-8">
+              <!-- 序章：不眠之夜（完整内容） -->
+              <article id="chapter-intro" class="mb-12">
+                <div class="flex items-center mb-6">
+                  <span class="inline-block px-3 py-1 bg-primary/10 text-primary rounded-full text-sm mr-3">序章</span>
+                  <h3 class="text-2xl font-bold text-dark">不眠之夜</h3>
+                </div>
+
+                <div class="prose max-w-none text-dark/90 leading-relaxed">
+                  <p class="mb-4">（我希望我创造的人物不是不死之身、主角光环，而是草木皆兵的形象）</p>
+
+                  <p class="mb-4"><strong>前提概要：</strong></p>
+
+                  <p class="mb-4">
+                    元村：像众多的大大小小的村子一样，他是一个再普通不过的小村子，朴素祥和、鸡犬相吠，不过它在外人看来仿佛浮现一种缥缈不真实的感觉，烟雾环绕，青山缠绕，夹在三个主要势力的分界处。后面要讲述的两个主要人物元浩、夜阳、大壮、秀花、齐村长、司马大爷，就是在这样一个村子出生、长大。不过对于他们来说，在村子消息并不闭塞，有私塾学堂，有讲书先生，有裁缝花匠，总之都城有的，在这也总能找到相同的东西代替。
+                  </p>
+
+                  <p class="mb-4">此时在一片林子附近，一袭白光闪耀。</p>
+
+                  <p class="mb-4">那是，“通灵元丹！！！”“快，快去抢夺元丹，皇都发号施令，找到元丹者封官加爵，还有数不尽的宝物”此时一片哗然，但很快被三位很有气质的统帅级人物呵住：</p>
+
+                  <p class="mb-4">“武当国众将士听令”“封山郡的勇士们听令”“蛮族的小的们听好了，率先抢得元丹者重重有赏”</p>
+
+                  <p class="mb-4">“冲啊！！！”</p>
+
+                  <p class="mb-4">
+                    “赶快点，赶快点，这乌云密布的，怕不是要下雨”“回家太晚，怕是又要被爹娘骂了”一个叫夜阳的大约八九岁的孩童叫道，“还不是你，非要出来偷偷玩，也不知道你看到什么了，让我们在这林子里迷了路”另一小孩元浩说，他看起来和前面那孩童年龄相仿。
+                  </p>
+
+                  <p class="mb-4">“什么话，怎么叫我出来玩，你不也出来了吗，再说了，你想在村子里一直待着吗”夜阳显然不赞同元浩对他的评价，略显抱怨地说道。</p>
+
+                  <p class="mb-4">“快走吧，别抱怨了，大不了我和你一块受罚”元浩答道。</p>
+
+                  <p class="mb-4">“喂，元浩，你听说没，从前我们这好像爆发过一场大战，当时死伤惨重，好像是为了争夺什么，什么，啊，对，什么宝丹”</p>
+
+                  <p class="mb-4">“你怎么突然想起来这了，肯定听过啊，听大壮叔叔说大概是500年前的事情，那么久了，你看，这片林子都和其余无异”是啊，时间冲刷了战争的痕迹，但当年战死的人却看不到如今的美丽。
+                  </p>
+
+                  <p class="mb-4">“诶呦，什么东西啊”夜阳叫了一声，一下打破了寂静的林子。</p>
+
+                  <p class="mb-4">“那好像是只兔子，是吧，刚看到往草丛那边跳过去了，走，过去看看，说不定我们可以抓一只少挨些骂”</p>
+
+                  <p class="mb-4">两个小孩矜矜战战地一点点移动着脚步，生怕草丛里突然冒出来什么可怕的东西。</p>
+
+                  <p class="mb-4">“诶？这里怎么躺着一个小女孩啊，”夜阳惊讶道，看样子好像是昏迷了。</p>
+
+                  <p class="mb-4">“怎么办”元浩主意拿不定。</p>
+
+                  <p class="mb-4">“肯定是把她带到村子找村长爷爷啊”夜阳毫不客气的说。</p>
+
+                  <p class="mb-4">“那，如果他的家人找不到她，会不会担心啊”元浩担心，“万一，他的家人找到之后，说我们的过错怎么办？万一，万一他只是自己睡着了........”</p>
+
+                  <p class="mb-4">“你，你。 你，你刚才说回去和我一块受罚，也是假的吧，怎么那么多万一”</p>
+
+                  <p class="mb-4">“大不了出了事我担着，你看你，磨磨唧唧，怎么和村长爷爷一样担心这担心那了”</p>
+
+                  <p class="mb-4">“来，说好了，带回去”</p>
+
+                  <p class="mb-4">过了好一会，元浩见没了动静，不知发生了什么，扭头看了看，正准备说话。</p>
+
+                  <p class="mb-4">“额。。。。。”</p>
+
+                  <p class="mb-4">“小耗子”夜阳低声的说到</p>
+
+                  <p class="mb-4">“那个”“这个”</p>
+
+                  <p class="mb-4">“你不是要带回去吗，走啊”元浩不解的看着</p>
+
+                  <p class="mb-4">“这小娃，太吃福，我怕我担不起”</p>
+
+                  <p class="mb-4">“说人话！！！！！”元浩一副想揍他的语气</p>
+
+                  <p class="mb-4">“她有点重，我抬不动”夜阳挠了挠头，他知道他两个相比，元浩的力气更大，他这个小身板，只有一身的坏主意罢了，一时兴起，每次还是元浩来帮他断后。</p>
+
+                  <p class="mb-4">元浩非常无语，只能在夜阳的指挥下把这个不知来历的女孩带了回去。</p>
+
+                  <p class="mb-4">此时的心存善意的两人，不知道他们的行为将会给他们的命运带来非同寻常的改变。</p>
+
+                  <p class="mb-4">俩小孩一到村头就看到夜阳他娘，</p>
+
+                  <p class="mb-4">“兔崽子，看我不打死你，你又去哪混了”秀花大婶叫道</p>
+
+                  <p class="mb-4">“还有你，小耗子，你怎能跟着他，随他的性子，真不知道你俩谁才是真正的小耗子”</p>
+
+                  <p class="mb-4">“赶紧回去吧，饭都快凉了，你这身架，还夜阳，也不知你那死老爹怎么给你起的名字，你连一颗星星都比不了”大婶唠叨的时候并没有看到元浩身后还背着一个小女孩。</p>
+
+                  <p class="mb-4">“小耗子，你爹娘也等你好久了，快回去吧”</p>
+
+                  <p class="mb-4">“不，娘，还不能走呢”夜阳给他娘解释之后，他娘才看见那个小女孩，因为当时夜幕已经降临，元浩又挺高的，恰好把小女孩挡住了。</p>
+
+                  <p class="mb-4">“你这熊孩子，不早说”“这是谁家的姑娘啊”</p>
+
+                  <p class="mb-4">大婶瞧了瞧，“诶呦，还挺俊的”</p>
+
+                  <p class="mb-4">“快，你俩快带她找村长老头去吧，这女孩的去留可不是我们能决定的”秀花语气明显温和了许多。</p>
+
+                  <p class="mb-4">“村长爷爷、爷爷、爷爷，睡了吗”夜阳在村子的西南角一个小屋子前叫道</p>
+
+                  <p class="mb-4">但迟迟没有回应，只听见村长养的芙蓉鸟叫了几声。</p>
+
+                  <p class="mb-4">元浩等不下去了，“喂，老头，你再不出来，我就把你的这两只鸟烤了吃了”</p>
+
+                  <p class="mb-4">终于，这是挺好的办法，小屋亮起了灯，</p>
+
+                  <p class="mb-4">“进来吧”屋内传来一句有力又略显苍老的声音。</p>
+
+                  <p class="mb-4">待二人进了屋内，门自动关了。</p>
+
+                  <p class="mb-4">“你这家伙，真是耗子，啥都吃，那可是芙蓉鸟啊，我就那两只，先前的莲花鸡，你给我一锅端了”村长越说越亢奋。</p>
+
+                  <p class="mb-4">“诶？这女娃娃哪来的，谁要定娃娃亲啊”</p>
+
+                  <p class="mb-4">“没事我还不找你呢”元浩一脸冷漠，</p>
+
+                  <p class="mb-4">“还有奥，你的莲花鸡，不能全赖我，要不是他们追着小羊羔，还把他啄伤了”</p>
+
+                  <p class="mb-4">“可是他让我全宰的奥”元浩扭头看着夜阳。</p>
+
+                  <p class="mb-4">夜阳这时候恨不得找个地缝钻进去，那时候他还小，拿小石子投鸡，谁知道他们急眼了，</p>
+
+                  <p class="mb-4">再说了，他也没料到元浩真敢啊。在那之后，夜阳免不了他娘的一顿打骂</p>
+
+                  <p class="mb-4">“嘿，嘿嘿”夜阳委屈道</p>
+
+                  <p class="mb-4">知道了这个女孩的来由，村长说“听我的爷爷的爷爷的大爷说，我们村子有近千年的历史，这期间，没有外族势力入侵，战争也未殃及”</p>
+
+                  <p class="mb-4">“但同时，我们村子也没有进入外族人口，整座村子的居民全是老一辈的血脉，说不定呢，我还是你大爷的大爷呢”村长老头调侃道。</p>
+
+                  <p class="mb-4">元村的现任村长，姓齐，名石，听说他出生的时候，请了一位外地来的风水先生，先生说他，五行缺土，而他的爹娘呢，又觉着名字里面带土有点太土了，于是化土为石，这才有的名字“齐石”
+                  </p>
+
+                  <p class="mb-4">
+                    不过，齐家可是人数最多的家族，相传曾经好几位齐家子孙外出闯荡，虽然有的无功而返，又回到了春耕秋织的生活，但也听说有很多出去的人永远回不来了，或是葬在了异乡，或是在外成骑先将，威名远扬。</p>
+
+                  <p class="mb-4">所以说，齐家人的威望在村内挺高，所以当年齐石当选村长，几乎没有人有异议 。</p>
+
+                  <p class="mb-4">又说回来，</p>
+
+                  <p class="mb-4">
+                    齐石看着眼前这个小女娃，那身体还在蜷缩着，他不免心生怜悯，正巧这时，女娃像是受惊了一般，猛地一动弹，齐石那老头子，赶紧地护住，看他那手忙脚乱的样子，元浩就知道这件事情就算是有着落了，刚想拉着夜阳离开，夜阳那个死脑袋赶忙问
+                  </p>
+
+                  <p class="mb-4">“村长爷爷，就留下她吧，行不行，行不行”“我，我明年养一只莲花鸡赔给您，好不好”夜阳说</p>
+
+                  <p class="mb-4">元浩心想“完了，又干了份亏本的买卖”</p>
+
+                  <p class="mb-4">“看在你那么求情，这女娃又生的如此可怜的份上，就破个例，收下吧”</p>
+
+                  <p class="mb-4">“好诶！！！！”夜阳激动地叫了起来。</p>
+
+                  <p class="mb-4">“谁啊，还让不让人睡觉了，明还要干活呢”外面吼来一声。</p>
+
+                  <p class="mb-4">“不过.....”村长犹豫了一下</p>
+
+                  <p class="mb-4">“什么”夜阳的耳朵顿时竖了起来，元浩也来了性子</p>
+
+                  <p class="mb-4">“明天黄昏时分开个全村会议，有十之八九的人同意才行”“宣传的事，还得你去跑腿啦”夜阳说到。</p>
+
+                  <p class="mb-4">“没问题，我以为你临时变卦了”夜阳吓了一跳。</p>
+
+                  <p class="mb-4">第二天晌午，元浩和夜阳在私塾学书，私塾先生叫独孤画，他其实不是教画画的，他主讲古语，传授经典。</p>
+
+                  <p class="mb-4">“翩翩君子.....”</p>
+
+                  <p class="mb-4">“翩翩君子.....”窗外传来孩童的朗诵声，</p>
+
+                  <p class="mb-4">“温润如玉”</p>
+
+                  <p class="mb-4">“温润如玉.......”</p>
+
+                  <p class="mb-4">“说的是什么意思呢，是有风度，有高雅气节的人像美玉一般受人暧昧，这句话呢出自.........”独孤画在讲座上动情的演说，丝毫没料到下面正谋划一件大事。</p>
+
+                  <p class="mb-4">“喂，小耗子，走不走”夜阳拿住书简挡住脸悄声说，</p>
+
+                  <p class="mb-4">“什么？？”元浩说“听~不~~~~见”</p>
+
+                  <p class="mb-4">“臭耗子，走不走，快，先生还在陶醉，正是我俩溜走的最佳时机啊”</p>
+
+                  <p class="mb-4">两人就结伴出逃了。</p>
+
+                  <p class="mb-4">一边走，夜阳一边说“一会，我们俩，一人往东，一人往西，应该能把昨天的宣传任务宣传到位”</p>
+
+                  <p class="mb-4">元浩看着夜阳一脸猥琐的表情，无可奈何地摇摇头“那老头都说了，黄昏时刻才会开会，现在太阳还没到头顶，那么着急干甚”</p>
+
+                  <p class="mb-4">“大哥，咱村子虽然没有那么大，但还要挨家挨户诶，村长爷爷说了要十之八九，快走吧”</p>
+
+                  <p class="mb-4">“那，我往西”元浩随便选了一个，</p>
+
+                  <p class="mb-4">“好，那我就向东，咱们村子西南角汇合”夜阳说。</p>
+
+                  <p class="mb-4">也不知什么给了夜阳那么大的动力，为了一个不知来历的女娃。元浩只能任由他，毕竟，他在主宰女娃的去留，或者往坏处想，主宰着她的生死。</p>
+
+                  <p class="mb-4">说罢，二人便朝对立的方向走去，元浩的任务挺小，毕竟他是向西，只要到西南就可以。他一路沾花聂柳，路上碰见的莲花鸡都要给他让道，毕竟在它们眼中“那可是活阎王啊！！！！”</p>
+
+                  <p class="mb-4">再看夜阳，忙得不得了，说是他刚经历一场大雨都不为过。</p>
+
+                  <p class="mb-4">“哟，这不夜阳，小羊羔嘛”</p>
+
+                  <p class="mb-4">夜阳循着声音一瞧，那直接把他乐住了，那人正是司马大爷，是村子东边有名的闲人。</p>
+
+                  <p class="mb-4">“这小羊羔，不好好念书，又逃课啦”大爷带着七分讥讽的语气，三分责令，虽然司马大爷是闲人，但村长也交给他了任务，就是看守东边的村子缺口。</p>
+
+                  <p class="mb-4">
+                    相传那个缺口是在战乱中一位镖旗将军留下的，当时虽是无意，但也赔偿了村子很多东西，村长的莲花鸡的小鸡仔就是那时候留下的。这些年来，村长也一直念叨着那位了不起的将军，“据说呀，那将军身披血色战袍，手提青木紫竹枪，胯下甲亥马，腰前斜跨麻布包裹，一眼深邃万丈，在追当年的乾亥残将.......”
+                  </p>
+
+                  <p class="mb-4">“你不是和那元浩整天混天混日吗，怎么，今天只有你自己出来找食”</p>
+
+                  <p class="mb-4">夜阳没空搭理他“齐村长让你在今日黄昏时刻到村子西南角，别不去奥，不然我告你偷懒”</p>
+
+                  <p class="mb-4">夜阳怕他不去拉低了票数。</p>
+
+                  <p class="mb-4">一路上，到处都是夜阳的传销声。</p>
+
+                  <p class="mb-4">“元大爷，就麻烦您了，记得按时到”元浩走过最后一家，</p>
+
+                  <p class="mb-4">看到黄昏正临，于是开始走向与夜阳约好的西南。</p>
+
+                  <p class="mb-4">元浩到的时候，眼前只有一老槐树，树下一个老棋盘，他不禁走过去，顿时被眼前的景色震撼。</p>
+
+                  <p class="mb-4">“今夕何夕兮搴舟中流，今日何日兮得与王子同舟”</p>
+
+                  <p class="mb-4">恰巧，此时两只远飞的大雁映入元浩的眼帘，</p>
+
+                  <p class="mb-4">“恨登山临水，手挥七弦桐..........”传来一阵清脆的呼声，</p>
+
+                  <p class="mb-4">“目送归鸿”元浩有感而发。</p>
+
+                  <p class="mb-4">元浩回头一看，正是独孤先生。</p>
+
+                  <p class="mb-4">“怎么，夜阳那家伙又带着你逃学。亏你还知道给我留份书简，告知我事情的缘由”</p>
+
+                  <p class="mb-4">“不过，齐大爷怎么今天才开会啊，还是派你俩传话”</p>
+
+                  <p class="mb-4">“其实.......”元浩一言难尽的样子。</p>
+
+                  <p class="mb-4">“快哉、快哉”夜阳大叫道。</p>
+
+                  <p class="mb-4">元浩一惊，差些跌落下去。</p>
+
+                  <p class="mb-4">“哇，这，这天色，你说，我如果像那大将军一样此时在此勒马，那是多么潇洒啊”夜阳看着那黄昏，</p>
+
+                  <p class="mb-4">“骑马倚斜桥，满楼红袖招”</p>
+
+                  <p class="mb-4">“不错，小羊羔，看来你也不是不学无术嘛，说的不错”</p>
+
+                  <p class="mb-4">“诶？画先生，你也在这”夜阳边说边拱手行礼</p>
+
+                  <p class="mb-4">独孤画看着身旁两个矮他一半的小娃娃，竟有些引以为傲，这两位少年，注定不会呆在这儿一辈子，“哎！尽我所为，多教他们做人的道理吧”</p>
+
+                  <p class="mb-4">这两位小孩般的大人物，一个风情万种，感慨“每每诸神黄昏日，最是人间别离时”</p>
+
+                  <p class="mb-4">一个天马幻想，手着银杆枪，直挑金山柱。</p>
+
+                  <p class="mb-4">“臭小子，到处找你们呢”“先生也在啊”“快来，结果快出来了”大壮终于发现了他俩，赶忙把他们带到齐老头面前。</p>
+
+                  <p class="mb-4">“村长，我们村子可很久没进来外族子弟了，就这么一个毫无来历的女娃，没必要坏了这么多年的村规”“更何况，这女娃能不能活下来还不一定呢，多一事不如少一事.......”</p>
+
+                  <p class="mb-4">“不行，必须留下”夜阳听到这就不顾一点礼仪了，</p>
+
+                  <p class="mb-4">“留下来有活下去的希望，但是，把它放在外面，让他与野兽共眠吗，出去，他肯定会死的”夜阳怒吼道</p>
+
+                  <p class="mb-4">顿时，一片沉默，在座的大多数人怎么也没想到，平日里不学无术的人，此时的正义感竟然这么爆棚。</p>
+
+                  <p class="mb-4">但很快，齐老村长就打破了这该死的寂静，“胡闹！！！”</p>
+
+                  <p class="mb-4">“现在还不是你说话的时候”“我们向来人人都有发言权，但也不准你扰乱公堂”。</p>
+
+                  <p class="mb-4">“明以洞察、哲以保身”独孤先生从夜阳身后走出，</p>
+
+                  <p class="mb-4">“刚才阁下说的不无道理，如果因为救了这一个人，后面赔上了整座村子的气运，这也是不明智的”</p>
+
+                  <p class="mb-4">“看吧，还是先生有学问，村长，不能心软啊”那人继续说道。</p>
+
+                  <p class="mb-4">“但我们人人也有怜悯之心，气运是什么我们谁也说不清楚”“你们做决定就好，我尊重你们最后的决定，定然毫无怨言”说罢，独孤先生倚在那一面泥墙旁静静地听着。</p>
+
+                  <p class="mb-4">“齐村长，你看哈，我家娃大半夜好不容易才把她带回来，你这说丢就丢，怎么也不和人情吧”“再者说，能让我家娃和小耗子碰到，说明有缘分啊，我还是觉着留着吧”说话的是秀花大婶。
+                  </p>
+
+                  <p class="mb-4">好一会，台下众议纷纷。</p>
+
+                  <p class="mb-4">“蒙兄，你怎么看”村长转头问身边的老者，</p>
+
+                  <p class="mb-4">当众人看到这一幕，纷纷震惊，“蒙老头不是傻了吗，村长竟然问他的意见？？？”众人很不可思议。</p>
+
+                  <p class="mb-4">说起蒙爷，村中就属蒙家一脉最少，也最惨淡，十几年前，听说蒙爷偶然得到一块黑白古盘，自那以后，旁人和他说话，他就糊涂了。</p>
+
+                  <p class="mb-4">但好在也巧，蒙爷在年轻的时候出去闯荡过，虽然没有什么收获，但也是习得一点点的占卜之术。挺旁人说，蒙爷可能就是这个原因才痴迷于手中那块盘的。</p>
+
+                  <p class="mb-4">众人更震惊了，蒙爷像是听懂村长的话一样，两手托起黑白盘，这么多年在手上，那盘都已经有了光泽。他低声跟村长说了些东西，随后又一动不动地坐在那里，像是什么事都没发生一样。
+                  </p>
+
+                  <p class="mb-4">“安静！！！！”</p>
+
+                  <p class="mb-4">“蒙兄说，诡辩莫测，道势所控，并非我们可以知晓”</p>
+
+                  <p class="mb-4">“切，我以为这傻子会仙术预测未来呢”一个声音这时非常刺耳。</p>
+
+                  <p class="mb-4">村长白了他一眼，那人也不好说什么</p>
+
+                  <p class="mb-4">“但他还说，盘上是天命，盘下才是人间，所以只有向下，求得下下签，走自己的大道，而又不逆天而行，我们就会收获更多”</p>
+
+                  <p class="mb-4">对啊，这个村子，他们本来只是想播种、发芽、开花、结果、归根、润发，一生没有太大诉求，气运那东西那么缥缈，真不好说明。</p>
+
+                  <p class="mb-4">“蒙爷霸气！！！”夜阳像是没记住刚才的呵斥，现在又大叫一声。</p>
+
+                  <p class="mb-4">“对，气运那东西，我只求个子孙泽福就够了，要什么大气运”不断有人开始遵循第二个观点。</p>
+
+                  <p class="mb-4">
+                    元浩一直没有说话，因为他的想法和夜阳是一样的，不过他不敢说出来，就算夜阳被责骂，元浩还是很羡慕他，所以每次元浩都主动帮他断后，他每次心甘情愿，即使因此受伤，挨爹娘骂，他就傻傻的笑一笑。很多人都笑他是傻子，可元浩的心机却也不少，“傻子”这个称呼，元浩还真没资格担任。
+                  </p>
+
+                  <p class="mb-4">“那么，现在可以投票了”</p>
+
+                  <p class="mb-4">全村217户人家，总人数有600余人，算上独孤先生这位弃权的，到场的共有428人，老少皆有权投票，如果年龄太小，需要长辈代投。</p>
+
+                  <p class="mb-4">“先生弃权啦，也就是说，428-1，然后再十之八九，就按九来算”夜阳津津有味地自言自语。</p>
+
+                  <p class="mb-4">“我们总共需要384票才行”夜阳蒙了，他没想到票数居然那么庞大。</p>
+
+                  <p class="mb-4">“你这家伙，怎么又随起我了，就不能按八算吗”元浩走来说到，</p>
+
+                  <p class="mb-4">“如果村长说的是十之八，那么我们只要342票”</p>
+
+                  <p class="mb-4">“那也好多啊”夜阳一脸沮丧。</p>
+
+                  <p class="mb-4">看到夜阳这样，元浩也不知道该说什么，以前他对夜阳的认识可是“人人喊打的过街老鼠”，现在竟然担心别人，担心的那么要死。</p>
+
+                  <p class="mb-4">“枕上有书樽有酒，身外事，”</p>
+
+                  <p class="mb-4">“哎，更何求”独孤画走来，看到元浩的样子，他大概也猜到了他的担忧。</p>
+
+                  <p class="mb-4">“随我来，小耗子”先生轻轻碰了碰元浩，将他带出堂外。</p>
+
+                  <p class="mb-4">此时，黄昏已过，黑夜正席卷大地，村长的两只芙蓉鸟还在枝头啾啾啼鸣，远处的老槐树已经快要看不清轮廓，但在仅存的霞光下，显得更加苍劲。</p>
+
+                  <p class="mb-4">“告诉我，你看到了什么”</p>
+
+                  <p class="mb-4">元浩随着先生的目光看去，“一片无际的黑暗？”</p>
+
+                  <p class="mb-4">“还有呢”</p>
+
+                  <p class="mb-4">“还有，一片荒芜”元浩叹了口气。</p>
+
+                  <p class="mb-4">“知道吗，我从前也和你一样，我也做过别人的后盾，不过没你那么傻，你实在傻，到蠢的地步了”先生轻笑几声，不知笑的是谁。</p>
+
+                  <p class="mb-4">“夜阳，他的父亲年轻时外出，再没回来，村长告诉村里人说，让各位多包容他，因为，他爹死了”</p>
+
+                  <p class="mb-4">“这，我知道”元浩低声说，</p>
+
+                  <p class="mb-4">“你就是因为这个原因放纵的他？陪他肆无忌惮？”</p>
+
+                  <p class="mb-4">“知道吗，今天，能看到夜阳的行为，身为先生，我确实感到有愧，因为礼仪，但又是因为这，我感到无比的自豪”</p>
+
+                  <p class="mb-4">“我向往的是现在的生活，每天清淡过日子，但从他身上，我看到了将军的影子，就是那个村长老念叨的将军，谁年少，不想身骑白马啊（呵呵呵）”</p>
+
+                  <p class="mb-4">“我想和你说的是，你，首先是要你自己”“之后再去保护他，懂吗”</p>
+
+                  <p class="mb-4">“像夜阳这样的表现，我知道，人非草木，孰能无情”</p>
+
+                  <p class="mb-4">“但，他的情更带着莽撞、冲动和一时兴起，我怕，他向前的时候把你推下万丈深渊”</p>
+
+                  <p class="mb-4">“我这个做先生的也不称职，哎，惭愧惭愧，放纵你俩整日逍遥”</p>
+
+                  <p class="mb-4">“知道今日我为什么不帮你们，反而弃权了吗”</p>
+
+                  <p class="mb-4">元浩摇摇头。</p>
+
+                  <p class="mb-4">“两个持有不同观点的人，只有说服一方，而又不反对另一方，才能让两方从对方的角度思考，今日这个会议，小小一件事，何必弄得大费周折，所以，我才卑退，记住，察言观色也是个好方法”
+                  </p>
+
+                  <p class="mb-4">“福，生于清廉，德，生于卑退”如果你还想继续帮他，就要多动脑子，做谦谦君子，记得吗，你们走之前讲的。</p>
+
+                  <p class="mb-4">“嗯，翩翩君子，温润如玉”</p>
+
+                  <p class="mb-4">“不错不错，夜阳那家伙有大将的潜力，而你，你的前途更宽啊”独孤画笑笑。</p>
+
+                  <p class="mb-4">“快回去吧，指不定夜阳又和谁杠起来了”</p>
+
+                  <p class="mb-4">“那先生，我先告退”</p>
+
+                  <p class="mb-4">待元浩走远后，独孤画才放开了笑，想不到啊，这俩小子，真的没想到，他们居然会.......</p>
+
+                  <p class="mb-4">“现在，公布投票结果，18人弃权，11人反对，398票通过，好，解散”村长刚说完，</p>
+
+                  <p class="mb-4">“耶！！”夜阳激动地快跳起来了。</p>
+
+                  <p class="mb-4">“那女娃就现在你家收养着吧”村长转身对元浩说，</p>
+
+                  <p class="mb-4">“啊？”夜阳问到“为什么不给我”</p>
+
+                  <p class="mb-4">“你什么性子，你自己不清楚吗”</p>
+
+                  <p class="mb-4">夜阳有挠了挠头，“行吧，反正我会去你家串门的”夜阳漏出奸诈的笑容。</p>
+
+                  <p class="mb-4">村长看着他俩，无奈地摇摇头。</p>
+
+                  <p class="mb-4">“小乖乖，跟着哥哥走喽，回家喽”夜阳让秀花大婶帮忙。</p>
+
+                  <p class="mb-4">“诶！！！别忘了我的莲花鸡”村长喊了一声。</p>
+
+                  <p class="mb-4">“什么~~~~~~~~听不见~~~~”夜阳学着元浩的方法，然后一溜烟跑了。</p>
+
+                  <p class="mb-4">等所有人都走后，村长也要回去了，但隐约看到槐树旁有一个人，近了一看，发现是独孤画，“先生，早些休息”村长说了一声也就走了。</p>
+
+                  <p class="mb-4">“天意？人间”独孤画哼了一声，</p>
+
+                  <p class="mb-4">随后他从袖中拿出一圆盘，真是苦了老蒙头了，过了认知的年纪，把自己搞垮了，</p>
+
+                  <p class="mb-4">这盘，哪有什么天上人间，逗小孩的把戏，今天倒也帮了一次他。</p>
+
+                  <p class="mb-4">没有人知道，这位私塾先生懂占卜，也没人知道他也有一个盘，更没人知道，此盘名“阴阳两仪错纹盘”，如果说蒙爷的是缘分所得，毕竟是次品，而独孤手中的，确是稀有古盘。</p>
+
+                  <p class="mb-4">“小耗子，快出来”</p>
+
+                  <p class="mb-4">“大清早的，你干嘛”“哎，哎，哎呦”元浩看到夜阳两手捧着一大堆毛毛茸茸的棉状物，</p>
+
+                  <p class="mb-4">“你这是干嘛？”元浩不解的问。</p>
+
+                  <p class="mb-4">“少废话，那小女娃呢”夜阳直接冲进屋内，东看看西找找。</p>
+
+                  <p class="mb-4">“你省些力气吧，她还睡着呢，不知道好点没有，昨天娘忙活了一晚上才把她安顿好”</p>
+
+                  <p class="mb-4">“在哪，在哪，带我去看看”夜阳一脸谄媚的表情。</p>
+
+                  <p class="mb-4">“！！！！！！！！！”元浩快无语死了，“跟我来，小点声”</p>
+
+                  <p class="mb-4">“放心，有我在，没意外”夜阳拍拍胸脯说。</p>
+
+                  <p class="mb-4">“哦吼吼吼，哇哦，这就是那小女娃”因为时间匆忙，夜阳还真没仔细看过小女娃的真容。</p>
+
+                  <p class="mb-4">“我能抱抱吗”夜阳又一脸谄媚的表情。</p>
+
+                  <p class="mb-4">“行行行，能等她醒了之后再说嘛”</p>
+
+                  <p class="mb-4">夜阳疯狂点头，随后二人就出了屋。</p>
+
+                  <p class="mb-4">“好久了，小耗子”夜阳贴过去，小心的说道，</p>
+
+                  <p class="mb-4">“昨天大婶为难你了吧”</p>
+
+                  <p class="mb-4">
+                    夜阳说的，就是元浩他娘，他娘可是村子小范围内有名的大喇叭，有的时候，和其他的大婶一样，也会以自己为中心，平时也一毛不拔，谁摘点他种的果子，都要闹半天，但出奇的就是和夜阳他家的关系挺好，送起东西来，也毫不吝啬。
+                  </p>
+
+                  <p class="mb-4">
+                    “没，怎么会呢，村长都同意了，娘也没怎么有怨言”元浩回想起昨天回家抱着这女娃的时候，娘在后面跟着，虽然也有唠叨，但话语里也没有怒气，即使有怨气，元浩也会理解到，毕竟谁会接受自己家来一个白吃白喝的不速之客。
+                  </p>
+
+                  <p class="mb-4">元浩他娘昨天忙里忙外，为这女娃又是找被褥，又是洗身子，忙了好久才弄好，那时元浩已经睡了，不知道后来的事情，他只知道，今天一大早，娘就外出了。</p>
+                </div>
+
+                <div class="mt-8 flex justify-between items-center">
+                  <button class="px-4 py-2 bg-gray-200 text-gray-600 rounded-md cursor-not-allowed opacity-50" disabled>
+                    <<i class="fa fa-angle-left mr-2">
+                      </< /i> 上一章
+                  </button>
+                  <a href="#chapter-1"
+                    class="px-4 py-2 bg-primary text-light rounded-md hover:bg-primary/90 transition-colors duration-200">
+                    下一章 <<i class="fa fa-angle-right ml-2">
+                      </< /i>
+                  </a>
+                </div>
+              </article>
+
+              <!-- 第一章：秘境通道（完整内容） -->
+              <article id="chapter-1" class="mb-12">
+                <div class="flex items-center mb-6">
+                  <span class="inline-block px-3 py-1 bg-primary/10 text-primary rounded-full text-sm mr-3">第一章</span>
+                  <h3 class="text-2xl font-bold text-dark">秘境通道</h3>
+                </div>
+
+                <div class="prose max-w-none text-dark/90 leading-relaxed">
+                  <p class="mb-4">
+                    约莫过了一载，林子变化很大，皇都的也变化了很多，改朝换代，如今已是大元王朝，但这些对村子的影响很小。对啊，很小，不管什么王朝，不论谁在位当权，他们都是底层人，始终被都城的人看不起，而这个王朝也并不是权利为尊，大元尊重实力，所以对于像他们这样的下层人来说修行之道还是可以富贵的唯一途径。
+                  </p>
+
+                  <p class="mb-4">村子这天异常热闹，就暂且叫他元村吧。一大早，元村村口围满了很多人。“诶？小耗子呢”夜阳率先发现了少一个人，平常元浩可是最喜欢凑热闹的，今天没看到他，反倒感觉异常。</p>
+
+                  <p class="mb-4">
+                    “喂喂喂，小耗子，起床啦，太阳花塞屁股啦，啷个时间啦”这时一个女孩笑嘻嘻地朝正趴在床上呼呼大睡的元浩扔衣服。元浩被叫醒后，第一反应就是拿着衣服捂住身体，毕竟，他可是几乎一丝不挂地趴在床上睡觉的。“小，小，卯卯，你怎么进来的，我，我不是关着门的吗”
+                  </p>
+
+                  <p class="mb-4">“当然是阿爸给我开的门呢，你也不看看这都啥时候了，夜阳早就去村口了”</p>
+
+                  <p class="mb-4">“哦，对诶”元浩一拍脑袋，惊叫一声，他忘了今天是进入秘境的日子。</p>
+
+                  <p class="mb-4">“快快快，夜阳那家伙，估计我已经在他嘴里死好几次了”元浩赶忙草草穿衣跑出去。</p>
+
+                  <p class="mb-4">元浩跑到村口，一眼就看到了夜阳，他刚想过去打招呼，只见夜阳一个后撤步，直接朝他肚子上蓄力一击，“知道等你多久了吗，那么重要的日子你还能睡过”夜阳骂骂咧咧地。</p>
+
+                  <p class="mb-4">村长见到元浩到了，等了一会，发现该到的人员都已到齐，就开口说。孩子们，今天是你们重要的日子，是你们通过试炼密道选择修行之道的唯一机会，同样，也是你们可以出人头地的机会。
+                  </p>
+
+                  <p class="mb-4">“嘿嘿嘿，村长还是一如既往的唠叨”夜阳偷摸的和元浩说。</p>
+
+                  <p class="mb-4">“你怎么还是咩咩咩地不停”元浩调戏地说道。</p>
+
+                  <p class="mb-4">“你找揍是不是”夜阳撸起袖子打算干的样子。</p>
+
+                  <p class="mb-4">“大壮，把元石拿出来”村长总算讲完了，抬高音量表示下面说的是重点。</p>
+
+                  <p class="mb-4">元石，是历朝历代都可以使用的一种修行材料，同时，他也可以作为交易工具，具体规格看元石的菁纯品种。</p>
+
+                  <p class="mb-4">“这是元石，你们修炼时是必须的，可以说，没有元石，你们没有能力修炼，修炼达到一定水平，可以增加寿命，强身健体，百病不侵”大壮一一介绍到。</p>
+
+                  <p class="mb-4">“怎么没听村长提到过啊”元浩问到。</p>
+
+                  <p class="mb-4">“元石，在我们村子可是很稀有的，只有在你们行冠礼的时候才能拿出来使用，我们村子年龄集中，你们当然没机会见到”村长像是用一种自豪的语气说的。</p>
+
+                  <p class="mb-4">“在秘境通道内，你们有三个选择，武当国、封山郡、蛮族，当然，你们进入那一个，都要从小做起”</p>
+
+                  <p class="mb-4">“哇，武当，这些年出门打猎的时候见到那些武当的弟子好厉害的样子，我要去武当”夜阳很兴奋的叫到。</p>
+
+                  <p class="mb-4">“那我也去武当”元浩说。</p>
+
+                  <p class="mb-4">“给，小羊羔子，这是你的秘境石，根据颜色选择通道就可以”大壮说。</p>
+
+                  <p class="mb-4">“来，这是你的，小耗子”</p>
+
+                  <p class="mb-4">“我先走咯，小耗子，快跟上”夜阳一下就进入秘境之中。</p>
+
+                  <p class="mb-4">看元浩，他转身看到卯卯，她一脸含情脉脉的样子，不免心动了起来。</p>
+
+                  <p class="mb-4">“对了，忘了跟你们说了，夜阳这小子，真是急躁，卯卯是十年前你们带回来的，你们出去游历的时候也顺便打听一下卯卯的身世”村长说。</p>
+
+                  <p class="mb-4">元浩点了点头。</p>
+
+                  <p class="mb-4">元浩摸了摸卯卯的头，“乖，等我回来”</p>
+
+                  <p class="mb-4">随后，元浩也进入了秘境。</p>
+
+                  <p class="mb-4">“村长爷爷，他们两个的通道颜色怎么不一样啊”卯卯发现。</p>
+
+                  <p class="mb-4">“坏了，给小耗子的那块是去，，，，封山郡的”大壮说。</p>
+
+                  <p class="mb-4">“你呀！！！”村长无奈道。</p>
+
+                  <p class="mb-4">“村长，没告诉他们还有秘境的考验，真的没关系吗”秀花大婶说，“他们还是几个小娃娃，感觉有点心理准备毕竟是好的”</p>
+
+                  <p class="mb-4">“对啊，他们还小啊”“外面的世界.......”村长此时看了看大壮胳膊上的伤疤笑了笑不再说话。</p>
+
+                  <p class="mb-4">秀花大婶此时也明白了村长的意思，便不再说什么。</p>
+
+                  <p class="mb-4">随后村长遣散了围观的人，转身走向几位六七旬的村民，“这一代的孩子们送出去了，我们这些老骨头也该行动了”</p>
+                </div>
+
+                <div class="mt-8 flex justify-between items-center">
+                  <a href="#chapter-intro"
+                    class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition-colors duration-200">
+                    <<i class="fa fa-angle-left mr-2">
+                      </< /i> 上一章
+                  </a>
+                  <a href="#chapter-2"
+                    class="px-4 py-2 bg-primary text-light rounded-md hover:bg-primary/90 transition-colors duration-200">
+                    下一章 <<i class="fa fa-angle-right ml-2">
+                      </< /i>
+                  </a>
+                </div>
+              </article>
+
+              <!-- 第二章：热情的小镇（完整内容） -->
+              <article id="chapter-2" class="mb-12">
+                <div class="flex items-center mb-6">
+                  <span class="inline-block px-3 py-1 bg-primary/10 text-primary rounded-full text-sm mr-3">第二章</span>
+                  <h3 class="text-2xl font-bold text-dark">热情的小镇</h3>
+                </div>
+
+                <div class="prose max-w-none text-dark/90 leading-relaxed">
+                  <p class="mb-4">此次总共出来进入秘境之中的算上他们两个也就十个左右，倒也不是村子孩童少，不过是有的大婶不放心自己的娃娃去外面的世界自己闯荡。</p>
+
+                  <p class="mb-4">
+                    他们各自走到自己的秘境入口时，拿出自己的秘境石放在石门残缺的地方，石门自动打开。元浩他们哪见过这种机关，他们赶忙战栗，生怕突然冒出个野猪朝他们冲过来。不过好在什么事情都没有发生。</p>
+
+                  <p class="mb-4">
+                    元浩试探性的走进门内，顿时眼前呈现一种别样的景象，赫然可以看出，是一个小镇，他们也就出现在小镇的入口处，按照这座小镇的布局，应该是东门。不过，这座小镇虽然看上去很一般的样子，但他的名字挺有个性，叫清风镇，两边还有两句打油诗类的话“清风虽是过客，主人也要开桌”，元浩问了一下当地的居民才知道意思大概是就算是身无分文的外乡人经过，这个小镇的人也会平等对待它们。
+                  </p>
+
+                  <p class="mb-4">与此同时，其他的进入秘境的人也见到这个小镇了，但他们可以说并不在一个空间，这意味着，考验已经开始了。</p>
+
+                  <p class="mb-4">
+                    元浩继续往前走，不知情的他还以为自己正深处武当，一路上见到的景象不亚于他们村子的和谐景象，可以说人人有礼，一切都是那么的井然有序，偶尔还会飞过几只杜鹃。但一路上元浩总感觉有些不适，就是说不出来什么，谦和没有纷争的气息让他感到很温暖但也有种过于温和。穿过几条小巷，路上遇到一个小女孩，嘴里正嘟囔着一首童谣：
+                  </p>
+
+                  <p class="mb-4">一个哈巴狗，蹲在大门口，两眼泪汪汪，想吃肉骨头</p>
+
+                  <p class="mb-4">“奶奶，为什么是一只啊，我还有一个妹妹呢，它自己一个人会不会太孤独了”</p>
+
+                  <p class="mb-4">旁边的老人笑了笑，“因为啊，两只狗狗的话，一根骨头不好分啊”</p>
+
+                  <p class="mb-4">
+                    这时，面前出现一帮人，衣服像是统一调度的制服，听到那当地人说是执法队，负责这个小镇的安全巡查，但是一般的话，这个小镇的东部还是没什么祸端的，毕竟没有人想做那个出头鸟。所以说执法队每天就是绕着小镇走三圈，这个职位挺吃香的，还有不错的俸禄，但一般都是小镇的人投票选出的，任你再怎么有权势也没用，当然，这个小镇没有权势。
+                  </p>
+
+                  <p class="mb-4">
+                    元浩在这个小镇上生活了几天，每天被他们热情款待，但隐隐约约还是有点难为情，毕竟白拿别人的东西，白吃白喝好几天，任谁也会不舒服。这个小镇的人好像不这样认为，他们认为这是应有的招客方式，这不由得让元浩想到自己不会因为自己是外乡者的缘故吧。在接下来的几天，元浩虽然表面上没做很大的改变，但他每次借着溜达的理由观察着个小镇的异常。终于，在观察的第三天的时候，他走到小镇的北面，那完全就是他所认识的清风镇相反的形象，连环境都改变了一个色调，此处的鸟不再是杜鹃麻雀，而是成群结队的乌鸦，在枯树枝头嘶哑着胜利的嗓音。
+                  </p>
+
+                  <p class="mb-4">“老人家，请问你们是清风镇的居民吗”元浩见到一位老者，赶忙跑过去问到。</p>
+
+                  <p class="mb-4">“算是吧，小伙子，你是从东边来的吧，看着那么陌生啊”</p>
+
+                  <p class="mb-4">“对，我刚到这里不久”</p>
+
+                  <p class="mb-4">“小伙子，快走吧，北面不是你该来的地方。”</p>
+
+                  <p class="mb-4">
+                    从那位老者身上得知，从前这是一个非常普通的村子，不知什么时候，都城大乱，一位当权者落魄逃亡到这里，也就是你在的东面，那边也逐渐变成了一块富饶之地，而我们这边，由于劳动力大量流失，只剩我们这些老弱病残还在维持生活。
+                  </p>
+
+                  <p class="mb-4">
+                    元浩想着，一个名存实亡的流浪者能够改变一个镇子的风脉，真是够讽刺的，这个清风镇，总算找到他的不可接受的地方了，非黑即白，就算是当初在元村几位大婶还会因为野菜而争吵，东边的居民，与其说是热情，不如说如行尸走肉般被别人操控。
+                  </p>
+
+                  <p class="mb-4">
+                    元浩心想，规则既然是有人定的，那为什么要那么不平等，他为北面的不公愤愤不平，万物应有循环，资源分配不均可以说得过去，但鸟群走兽呢这作何解释，他可是清楚的的记得在东边，可是没有见到过一只乌鸦，同样，在这，他也没见到一直杜鹃飞进来。
+                  </p>
+
+                  <p class="mb-4">“身无分文的外乡人可以接受，为什么不能接纳原住民”</p>
+
+                  <p class="mb-4">“不，不是接纳，不是分化，是一堵无形的墙，这镇子划分如此明显，很不像没人操纵”</p>
+
+                  <p class="mb-4">可，镇子上的人大家都熟悉，按理说，一人得道，鸡犬升天，为何，为何。</p>
+
+                  <p class="mb-4">元浩很是他不明白头痛，他不明是什么力量限制了万物流通。傀儡般的人类，天壤之别的生活，被封印于此的清风？？？？</p>
+
+                  <p class="mb-4">（资源分配那么不公，清风镇，那个流浪者，不，不，这和流浪者的身份关系似乎不大。还是有些问题。）</p>
+
+                  <p class="mb-4">他正打算转身告诉老者，他在自己的村子干过农活，知道些生产道理，他想可以帮助北面恢复生机”</p>
+
+                  <p class="mb-4">但老者已没了踪迹，以此同时，周围的一切开始瓦解。</p>
+
+                  <p class="mb-4">“看来你已经发现了问题的所在”“外面的世界是在规则之下、是不公的，你要去接受，同时，你也要去改变，否则，你将不具备通过秘境的资格，你很幸运，通过考验”</p>
+
+                  <p class="mb-4">“即可传送、、、、”</p>
+
+                  <p class="mb-4">夜阳转过身，“老爷爷”“诶？人呢？”</p>
+
+                  <p class="mb-4">这个空间如果是虚拟的，那么构建这个空间的人，是不是也是被构建出来的呢。</p>
+                </div>
+
+                <div class="mt-8 flex justify-between items-center">
+                  <a href="#chapter-1"
+                    class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition-colors duration-200">
+                    <<i class="fa fa-angle-left mr-2">
+                      </< /i> 上一章
+                  </a>
+                  <a href="#chapter-3"
+                    class="px-4 py-2 bg-primary text-light rounded-md hover:bg-primary/90 transition-colors duration-200">
+                    下一章 <<i class="fa fa-angle-right ml-2">
+                      </< /i>
+                  </a>
+                </div>
+              </article>
+
+              <!-- 第三章：秀林镇遇练石少年（完整内容） -->
+              <article id="chapter-3" class="mb-12">
+                <div class="flex items-center mb-6">
+                  <span class="inline-block px-3 py-1 bg-primary/10 text-primary rounded-full text-sm mr-3">第三章</span>
+                  <h3 class="text-2xl font-bold text-dark">秀林镇遇练石少年</h3>
+                </div>
+
+                <div class="prose max-w-none text-dark/90 leading-relaxed">
+                  <p class="mb-4">“哎呦！！！”元浩大叫一声，他从一米高的地方摔下。</p>
+
+                  <p class="mb-4">那个高度其实并不会太痛，主要是他根本不知道自己会随机放在空中，直接把他吓了一跳。</p>
+
+                  <p class="mb-4">“诶？？？夜阳呢”元浩此时并不知道他和夜阳去的并不是同一个地方，封山郡在整个大元王朝的西南部，而武当则在东北处。</p>
+
+                  <p class="mb-4">“不会被我踩死了吧，我记得他挺大块的诶........”元浩一边说一边朝自己脚下看。</p>
+
+                  <p class="mb-4">其实这个时候，元浩是希望夜阳在脚下的，但他从刚开始想的时候就大概清楚夜阳不在。</p>
+
+                  <p class="mb-4">“这地方...........”元浩叫道</p>
+
+                  <p class="mb-4">“这就武当吗”夜阳说，“不知道小耗子那边额呢么样了”“武当之大，终会相遇，我还是先摸摸情况吧”</p>
+
+                  <p class="mb-4">“好破啊”元浩惊叹完，发出最后的评价。</p>
+
+                  <p class="mb-4">“秀林镇，这名字不错啊”</p>
+
+                  <p class="mb-4">“不过这个卖相也太丑了吧”镇子前飘过几片树叶，一眼望去，镇中一片荒芜</p>
+
+                  <p class="mb-4">“说实话，我还是感觉清风镇的迎接仪式好一点”说着说着元浩提了提衣服，挺了挺腰。</p>
+
+                  <p class="mb-4">“诶？仪仗队呢，我都到这了，怎么还没有人来接我，武当这待遇也太差了吧”元浩边埋怨边往镇里走去</p>
+
+                  <p class="mb-4">“清风镇是进去之后出不来，这秀林镇不会是只有清风吧”说真的，元浩还挺怕这个镇子还是考研中的一部分。</p>
+
+                  <p class="mb-4">“嘿哈！！！！！”镇子前的树林里传出一阵声音</p>
+
+                  <p class="mb-4">“这荒山野岭的，应该是人吧”元浩胆子还是挺小的</p>
+
+                  <p class="mb-4">元浩远远看到一个人影，然后偷偷的观察。</p>
+
+                  <p class="mb-4">只见一男子手提青竹，两眼微微睁开，面目倒是有些清秀，离他五步远处赫然立着一块石头，很显然是他特意放置的。</p>
+
+                  <p class="mb-4">“嘿哈！！”</p>
+
+                  <p class="mb-4">这个陌生男子边抬起手臂，边向前推出青竹。</p>
+
+                  <p class="mb-4">“什么东西”元浩因为看的太入迷了，脚上突然一凉，看了才知道是一片树叶轻轻拂过。</p>
+
+                  <p class="mb-4">“什么人”男子青竹一指，挡在元浩前面的树叶全被扫清。</p>
+
+                  <p class="mb-4">“我，是路过，看你练武入了迷猜打搅到你”元浩说话还算客气</p>
+
+                  <p class="mb-4">“路过？？？这秀林镇荒废多少载了，竟然有人路过”男子显然不信</p>
+
+                  <p class="mb-4">“我刚来我刚来，我是来试炼的”元浩边说边把双手挡在脸前</p>
+                  <p class="mb-4">“哈哈哈哈哈，那么多人试炼选择武当，你还真挺稀奇的，来这封山郡”</p>
+
+                  <p class="mb-4">见他没有一点恶意，男子也就放下了警惕。</p>
+
+                  <p class="mb-4">“请问阁下如何称呼，我是纪岚，因为了解到这边冷清无人，特意来此练习剑术”</p>
+
+                  <p class="mb-4">“元浩，你可以叫我小耗子，他们都这样叫”</p>
+
+                  <p class="mb-4">“好，元兄，你我相逢及时缘分，看我来舞一剑可好”</p>
+
+                  <p class="mb-4">说罢，纪岚轻佻青竹，手捏一片树叶，那青竹一横一扫略显了将军之气，在元浩还在惊讶时，</p>
+
+                  <p class="mb-4">纪岚又耍出一式，</p>
+
+                  <p class="mb-4">“石柱！！涨！！！！！”</p>
+
+                  <p class="mb-4">那特意被放置的石块像草木一般猛然生长，最后纪岚两脚轻轻点在石柱顶端。</p>
+
+                  <p class="mb-4">此时的元浩已经目瞪口呆了。</p>
+
+                  <p class="mb-4">“哎呦！！！！”好巧不巧，纪岚心里想着，自己把所有的本领都拿出来了，这小耗子应该，心里暗自窃喜，却一个不注意就踩滑了，重重的摔在元浩前。</p>
+                </div>
+
+                <div class="mt-8 flex justify-between items-center">
+                  <a href="#chapter-2"
+                    class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition-colors duration-200">
+                    <<i class="fa fa-angle-left mr-2">
+                      </< /i> 上一章
+                  </a>
+                  <button class="px-4 py-2 bg-gray-200 text-gray-600 rounded-md cursor-not-allowed opacity-50" disabled>
+                    下一章 <<i class="fa fa-angle-right ml-2">
+                      </< /i>
+                  </button>
+                </div>
+              </article>
+            </div>
+
+            <!-- 阅读进度板块 -->
+            <div class="mt-8 bg-white/70 backdrop-blur rounded-lg shadow-md p-6">
+              <h3 class="text-xl font-bold text-primary mb-4">阅读进度</h3>
+              <div class="w-full bg-gray-200 rounded-full h-2.5 mb-2">
+                <div class="bg-primary h-2.5 rounded-full" style="width: 30%"></div>
+              </div>
+              <p class="text-sm text-gray-600">已阅读 3/10 章 (30%)</p>
+              <div class="mt-4 flex justify-center">
+                <button
+                  class="px-4 py-2 bg-secondary hover:bg-secondary/90 text-dark rounded-md transition-colors duration-200">
+                  <<i class="fa fa-bell mr-2">
+                    </< /i> 订阅更新提醒
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 人物介绍板块 -->
+    <section id="characters" class="py-16 bg-primary/5">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-primary mb-4">主要人物介绍</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            一个个鲜活的角色，一段段传奇的故事，他们的命运交织在一起，
+            共同谱写了大元王朝最后的篇章
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- 元浩 -->
+          <div
+            class="bg-white/80 backdrop-blur rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:transform hover:scale-102">
+            <div class="h-48 bg-primary/10 flex items-center justify-center">
+              <<i class="fa fa-user-circle text-6xl text-primary/70">
+                </< /i>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-dark mb-2">元浩</h3>
+              <p class="text-sm text-gray-500 mb-4">昵称：小耗子 | 年龄：约10岁</p>
+              <div class="space-y-2 mb-4">
+                <div class="flex items-center">
+                  <span class="w-24 text-gray-600">性格：</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-sm">沉稳</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-sm ml-2">善良</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-sm ml-2">有担当</span>
+                </div>
+                <div class="flex items-center">
+                  <span class="w-24 text-gray-600">特长：</span>
+                  <span class="text-gray-700">力气大、重情义、有谋略</span>
+                </div>
+                <div class="flex items-center">
+                  <span class="w-24 text-gray-600">身份：</span>
+                  <span class="text-gray-700">元村少年，后入封山郡修行</span>
+                </div>
+              </div>
+              <p class="text-gray-700 text-sm">
+                元村少年，性格沉稳内敛，重情重义，虽然话不多但很有主见。
+                与夜阳是最好的朋友，总是在夜阳闯祸后默默收拾残局。
+                意外被传入封山郡，开启了不一样的修行之路。
+              </p>
+            </div>
+          </div>
+
+          <!-- 夜阳 -->
+          <div
+            class="bg-white/80 backdrop-blur rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:transform hover:scale-102">
+            <div class="h-48 bg-primary/10 flex items-center justify-center">
+              <<i class="fa fa-user-circle text-6xl text-primary/70">
+                </< /i>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-dark mb-2">夜阳</h3>
+              <p class="text-sm text-gray-500 mb-4">昵称：小羊羔 | 年龄：约10岁</p>
+              <div class="space-y-2 mb-4">
+                <div class="flex items-center">
+                  <span class="w-24 text-gray-600">性格：</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-sm">活泼</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-sm ml-2">冲动</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-sm ml-2">正义感强</span>
+                </div>
+                <div class="flex items-center">
+                  <span class="w-24 text-gray-600">特长：</span>
+                  <span class="text-gray-700">口才好、胆子大、有领袖气质</span>
+                </div>
+                <div class="flex items-center">
+                  <span class="w-24 text-gray-600">身份：</span>
+                  <span class="text-gray-700">元村少年，后入武当修行</span>
+                </div>
+              </div>
+              <p class="text-gray-700 text-sm">
+                元村少年，性格活泼开朗，正义感极强，虽然有些冲动但心地善良。
+                父亲早年外出未归，由母亲秀花抚养长大。
+                梦想成为像传说中那样的大将军，意外进入武当，开始了修行生涯。
+              </p>
+            </div>
+          </div>
+
+          <!-- 卯卯 -->
+          <div
+            class="bg-white/80 backdrop-blur rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:transform hover:scale-102">
+            <div class="h-48 bg-primary/10 flex items-center justify-center">
+              <<i class="fa fa-user-circle text-6xl text-primary/70">
+                </< /i>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-dark mb-2">卯卯</h3>
+              <p class="text-sm text-gray-500 mb-4">年龄：约10岁</p>
+              <div class="space-y-2 mb-4">
+                <div class="flex items-center">
+                  <span class="w-24 text-gray-600">性格：</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-sm">乖巧</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-sm ml-2">懂事</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-sm ml-2">聪慧</span>
+                </div>
+                <div class="flex items-center">
+                  <span class="w-24 text-gray-600">特长：</span>
+                  <span class="text-gray-700">善解人意、学习能力强</span>
+                </div>
+                <div class="flex items-center">
+                  <span class="w-24 text-gray-600">身份：</span>
+                  <span class="text-gray-700">神秘来历的女孩，被元浩收养</span>
+                </div>
+              </div>
+              <p class="text-gray-700 text-sm">
+                被元浩和夜阳在林子里发现的神秘女孩，身世不明。
+                乖巧懂事，深受元村村民喜爱。
+                她的出现似乎与五百年前的大战和通灵元丹有着某种联系。
+              </p>
+            </div>
+          </div>
+
+          <!-- 齐石 -->
+          <div
+            class="bg-white/80 backdrop-blur rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:transform hover:scale-102">
+            <div class="h-48 bg-primary/10 flex items-center justify-center">
+              <<i class="fa fa-user-circle text-6xl text-primary/70">
+                </< /i>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-dark mb-2">齐石</h3>
+              <p class="text-sm text-gray-500 mb-4">身份：元村村长 | 年龄：约60岁</p>
+              <div class="space-y-2 mb-4">
+                <div class="flex items-center">
+                  <span class="w-24 text-gray-600">性格：</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-sm">稳重</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-sm ml-2">公正</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-sm ml-2">有智慧</span>
+                </div>
+                <div class="flex items-center">
+                  <span class="w-24 text-gray-600">特长：</span>
+                  <span class="text-gray-700">治理村子、顾全大局</span>
+                </div>
+                <div class="flex items-center">
+                  <span class="w-24 text-gray-600">背景：</span>
+                  <span class="text-gray-700">元村大族齐家传人</span>
+                </div>
+              </div>
+              <p class="text-gray-700 text-sm">
+                元村村长，齐家传人，为人公正，顾全大局。
+                虽然表面上有些唠叨，但内心非常关心村民，尤其是年轻一代。
+                知道很多关于元村和五百年前大战的秘密。
+              </p>
+            </div>
+          </div>
+
+          <!-- 独孤画 -->
+          <div
+            class="bg-white/80 backdrop-blur rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:transform hover:scale-102">
+            <div class="h-48 bg-primary/10 flex items-center justify-center">
+              <<i class="fa fa-user-circle text-6xl text-primary/70">
+                </< /i>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-dark mb-2">独孤画</h3>
+              <p class="text-sm text-gray-500 mb-4">身份：元村私塾先生 | 年龄：不详</p>
+              <div class="space-y-2 mb-4">
+                <div class="flex items-center">
+                  <span class="w-24 text-gray-600">性格：</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-sm">博学</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-sm ml-2">深沉</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-sm ml-2">睿智</span>
+                </div>
+                <div class="flex items-center">
+                  <span class="w-24 text-gray-600">特长：</span>
+                  <span class="text-gray-700">教书育人、占卜预测</span>
+                </div>
+                <div class="flex items-center">
+                  <span class="w-24 text-gray-600">宝物：</span>
+                  <span class="text-gray-700">阴阳两仪错纹盘</span>
+                </div>
+              </div>
+              <p class="text-gray-700 text-sm">
+                元村私塾先生，学识渊博，看似普通实则深藏不露。
+                持有稀有古盘"阴阳两仪错纹盘"，懂占卜之术。
+                对元浩和夜阳寄予厚望，是两人成长道路上的重要导师。
+              </p>
+            </div>
+          </div>
+
+          <!-- 秀花 -->
+          <div
+            class="bg-white/80 backdrop-blur rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:transform hover:scale-102">
+            <div class="h-48 bg-primary/10 flex items-center justify-center">
+              <<i class="fa fa-user-circle text-6xl text-primary/70">
+                </< /i>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-dark mb-2">秀花</h3>
+              <p class="text-sm text-gray-500 mb-4">身份：夜阳的母亲 | 年龄：约35岁</p>
+              <div class="space-y-2 mb-4">
+                <div class="flex items-center">
+                  <span class="w-24 text-gray-600">性格：</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-sm">唠叨</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-sm ml-2">善良</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-sm ml-2">热心</span>
+                </div>
+                <div class="flex items-center">
+                  <span class="w-24 text-gray-600">特长：</span>
+                  <span class="text-gray-700">家务、照顾他人</span>
+                </div>
+                <div class="flex items-center">
+                  <span class="w-24 text-gray-600">特点：</span>
+                  <span class="text-gray-700">刀子嘴豆腐心</span>
+                </div>
+              </div>
+              <p class="text-gray-700 text-sm">
+                夜阳的母亲，性格直爽，有些唠叨但心地善良。
+                丈夫早年外出未归，独自抚养夜阳长大。
+                与元浩家关系很好，对卯卯也十分照顾。
+              </p>
+            </div>
+          </div>
+
+          <!-- 大壮 -->
+          <div
+            class="bg-white/80 backdrop-blur rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:transform hover:scale-102">
+            <div class="h-48 bg-primary/10 flex items-center justify-center">
+              <<i class="fa fa-user-circle text-6xl text-primary/70">
+                </< /i>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-dark mb-2">大壮</h3>
+              <p class="text-sm text-gray-500 mb-4">身份：元村村民 | 年龄：约40岁</p>
+              <div class="space-y-2 mb-4">
+                <div class="flex items-center">
+                  <span class="w-24 text-gray-600">性格：</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-sm">憨厚</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-sm ml-2">正直</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-sm ml-2">热心肠</span>
+                </div>
+                <div class="flex items-center">
+                  <span class="w-24 text-gray-600">特长：</span>
+                  <span class="text-gray-700">力气大、乐于助人</span>
+                </div>
+                <div class="flex items-center">
+                  <span class="w-24 text-gray-600">角色：</span>
+                  <span class="text-gray-700">村长助手，照顾村民生活</span>
+                </div>
+              </div>
+              <p class="text-gray-700 text-sm">
+                元村的热心村民，经常协助村长处理村务。
+                对元浩和夜阳十分照顾，胳膊上的伤疤暗示着他有过不平凡的经历。
+                在秘境通道开启时，负责向孩子们介绍元石的作用。
+              </p>
+            </div>
+          </div>
+
+          <!-- 司马大爷 -->
+          <div
+            class="bg-white/80 backdrop-blur rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:transform hover:scale-102">
+            <div class="h-48 bg-primary/10 flex items-center justify-center">
+              <<i class="fa fa-user-circle text-6xl text-primary/70">
+                </< /i>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-dark mb-2">司马大爷</h3>
+              <p class="text-sm text-gray-500 mb-4">身份：元村闲人 | 年龄：约65岁</p>
+              <div class="space-y-2 mb-4">
+                <div class="flex items-center">
+                  <span class="w-24 text-gray-600">性格：</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-sm">幽默</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-sm ml-2">爱调侃</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-sm ml-2">负责</span>
+                </div>
+                <div class="flex items-center">
+                  <span class="w-24 text-gray-600">职责：</span>
+                  <span class="text-gray-700">看守村子东边缺口</span>
+                </div>
+                <div class="flex items-center">
+                  <span class="w-24 text-gray-600">特点：</span>
+                  <span class="text-gray-700">爱念叨当年的镖旗将军</span>
+                </div>
+              </div>
+              <p class="text-gray-700 text-sm">
+                元村东边有名的闲人，负责看守村子的缺口。
+                喜欢调侃夜阳和元浩，看似闲散实则认真履行职责。
+                知道很多村子的历史传说，经常向孩子们讲述镖旗将军的故事。
+              </p>
+            </div>
+          </div>
+
+          <!-- 蒙爷 -->
+          <div
+            class="bg-white/80 backdrop-blur rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:transform hover:scale-102">
+            <div class="h-48 bg-primary/10 flex items-center justify-center">
+              <<i class="fa fa-user-circle text-6xl text-primary/70">
+                </< /i>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-dark mb-2">蒙爷</h3>
+              <p class="text-sm text-gray-500 mb-4">身份：元村孤寡老人 | 年龄：约70岁</p>
+              <div class="space-y-2 mb-4">
+                <div class="flex items-center">
+                  <span class="w-24 text-gray-600">性格：</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-sm">神秘</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-sm ml-2">孤僻</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-sm ml-2">深藏不露</span>
+                </div>
+                <div class="flex items-center">
+                  <span class="w-24 text-gray-600">宝物：</span>
+                  <span class="text-gray-700">黑白古盘（占卜用）</span>
+                </div>
+                <div class="flex items-center">
+                  <span class="w-24 text-gray-600">背景：</span>
+                  <span class="text-gray-700">曾外出闯荡，习得占卜之术</span>
+                </div>
+              </div>
+              <p class="text-gray-700 text-sm">
+                元村蒙家仅剩的传人，十几年前得到一块黑白古盘后变得看似糊涂。
+                实则懂得占卜之术，在是否收留卯卯的村民会议上，
+                他的话影响了最终的投票结果，是村子里隐藏的智者。
+              </p>
+            </div>
+          </div>
+
+          <!-- 纪岚 -->
+          <div
+            class="bg-white/80 backdrop-blur rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:transform hover:scale-102">
+            <div class="h-48 bg-primary/10 flex items-center justify-center">
+              <<i class="fa fa-user-circle text-6xl text-primary/70">
+                </< /i>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-dark mb-2">纪岚</h3>
+              <p class="text-sm text-gray-500 mb-4">身份：封山郡修行者 | 年龄：约18岁</p>
+              <div class="space-y-2 mb-4">
+                <div class="flex items-center">
+                  <span class="w-24 text-gray-600">性格：</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-sm">开朗</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-sm ml-2">豪爽</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-sm ml-2">爱炫耀</span>
+                </div>
+                <div class="flex items-center">
+                  <span class="w-24 text-gray-600">特长：</span>
+                  <span class="text-gray-700">剑术、控石之术</span>
+                </div>
+                <div class="flex items-center">
+                  <span class="w-24 text-gray-600">据点：</span>
+                  <span class="text-gray-700">秀林镇（封山郡境内）</span>
+                </div>
+              </div>
+              <p class="text-gray-700 text-sm">
+                封山郡的修行者，选择在荒废的秀林镇练习剑术。
+                性格开朗豪爽，见到元浩后主动展示自己的控石之术，
+                虽然有些爱炫耀但并无恶意，是元浩进入封山郡后遇到的第一个朋友。
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 世界观板块 -->
+    <section id="world" class="py-16 bg-white/80">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-primary mb-4">大元世界观</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            一个纷争不断的时代，三个势力鼎立，
+            秘境试炼开启修行之路，通灵元丹引发惊天秘密
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <!-- 势力分布 -->
+          <div>
+            <h3 class="text-xl font-bold text-dark mb-6 flex items-center">
+              <<i class="fa fa-map-marker text-primary mr-3">
+                </< /i>三大势力
+            </h3>
+
+            <div class="space-y-6">
+              <!-- 武当国 -->
+              <div class="bg-primary/5 p-6 rounded-lg shadow-sm">
+                <h4 class="text-lg font-semibold text-dark mb-3">武当国</h4>
+                <p class="text-gray-700 mb-3">
+                  位于大元王朝东北部，以道家修行为主，注重内外兼修，弟子众多，实力雄厚。
+                  武当弟子行事讲究章法，注重道义，是三大势力中最为正统的一方。
+                  夜阳选择进入武当国修行，向往成为正统的修行者。
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-xs">道家修行</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-xs">注重道义</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-xs">东北部</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-xs">正统</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-xs">夜阳修行地</span>
+                </div>
+              </div>
+
+              <!-- 封山郡 -->
+              <div class="bg-primary/5 p-6 rounded-lg shadow-sm">
+                <h4 class="text-lg font-semibold text-dark mb-3">封山郡</h4>
+                <p class="text-gray-700 mb-3">
+                  位于大元王朝西南部，地势险要，民风彪悍，修行方式较为豪放直接。
+                  封山郡注重实战能力，弟子多为江湖豪杰，实力不容小觑。
+                  元浩因秘境石出错而误入封山郡，在这里遇到了修行者纪岚。
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-xs">实战为主</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-xs">民风彪悍</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-xs">西南部</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-xs">豪放</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-xs">元浩修行地</span>
+                </div>
+              </div>
+
+              <!-- 蛮族 -->
+              <div class="bg-primary/5 p-6 rounded-lg shadow-sm">
+                <h4 class="text-lg font-semibold text-dark mb-3">蛮族</h4>
+                <p class="text-gray-700 mb-3">
+                  位于边境地带，以部落形式存在，修行方式独特，注重体魄强化和血脉传承。
+                  蛮族性格勇猛好斗，是三大势力中最为神秘和难以预测的一方。
+                  目前尚未有主要角色选择蛮族，但蛮族是争夺通灵元丹的重要势力之一。
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-xs">体魄强化</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-xs">勇猛好斗</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-xs">边境地带</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-xs">神秘</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-xs">部落制</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 关键元素 -->
+          <div>
+            <h3 class="text-xl font-bold text-dark mb-6 flex items-center">
+              <<i class="fa fa-diamond text-primary mr-3">
+                </< /i>关键元素
+            </h3>
+
+            <div class="space-y-6">
+              <!-- 通灵元丹 -->
+              <div class="bg-primary/5 p-6 rounded-lg shadow-sm">
+                <h4 class="text-lg font-semibold text-dark mb-3">通灵元丹</h4>
+                <p class="text-gray-700 mb-3">
+                  传说中的至宝，五百年前大战的导火索。拥有强大的能量，能够提升修行者的实力，
+                  甚至可能拥有起死回生的功效。皇都下令寻找，引发了三大势力的争夺。
+                  故事开篇就围绕三大势力抢夺通灵元丹展开，是贯穿整个故事的核心线索。
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-xs">至宝</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-xs">提升实力</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-xs">争夺焦点</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-xs">核心线索</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-xs">五百年大战导火索</span>
+                </div>
+              </div>
+
+              <!-- 秘境通道 -->
+              <div class="bg-primary/5 p-6 rounded-lg shadow-sm">
+                <h4 class="text-lg font-semibold text-dark mb-3">秘境通道</h4>
+                <p class="text-gray-700 mb-3">
+                  连接元村与外部世界的神秘通道，是年轻人选择修行之路的必经之地。
+                  秘境中设有考验，只有通过考验才能真正开始修行生涯。
+                  元浩和夜阳通过秘境通道进入修行地，元浩因秘境石出错误入封山郡。
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-xs">修行入口</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-xs">设有考验</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-xs">神秘通道</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-xs">元村少年必经之路</span>
+                </div>
+              </div>
+
+              <!-- 元石 -->
+              <div class="bg-primary/5 p-6 rounded-lg shadow-sm">
+                <h4 class="text-lg font-semibold text-dark mb-3">元石</h4>
+                <p class="text-gray-700 mb-3">
+                  修行必备的能量石，同时也是大元王朝的通用货币。
+                  元石的纯度决定了其价值，高纯度的元石能够极大地提升修行效率。
+                  在元村十分稀有，只有行冠礼时才能使用，是修行者不可或缺的资源。
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-xs">能量石</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-xs">通用货币</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-xs">提升效率</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-xs">稀有资源</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-xs">行冠礼专用</span>
+                </div>
+              </div>
+
+              <!-- 元村 -->
+              <div class="bg-primary/5 p-6 rounded-lg shadow-sm">
+                <h4 class="text-lg font-semibold text-dark mb-3">元村</h4>
+                <p class="text-gray-700 mb-3">
+                  位于三大势力交界处的神秘村庄，历史悠久，村民多为原住民后代。
+                  村子被烟雾环绕，仿佛与世隔绝，却隐藏着不为人知的秘密。
+                  是元浩、夜阳等主要角色的出生地，有着近千年未被外族入侵的传奇历史。
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-xs">三族交界</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-xs">历史悠久</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-xs">隐藏秘密</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-xs">主角出生地</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-xs">烟雾环绕</span>
+                </div>
+              </div>
+
+              <!-- 神秘古盘 -->
+              <div class="bg-primary/5 p-6 rounded-lg shadow-sm">
+                <h4 class="text-lg font-semibold text-dark mb-3">神秘古盘</h4>
+                <p class="text-gray-700 mb-3">
+                  故事中出现的占卜工具，分为两种：蒙爷的黑白古盘（次品）和独孤画的阴阳两仪错纹盘（稀有真品）。
+                  古盘能够辅助占卜，独孤画曾利用古盘影响村民会议的投票结果，
+                  是推动剧情发展的重要道具。
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-xs">占卜工具</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-xs">稀有真品</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-xs">剧情道具</span>
+                  <span class="px-2 py-1 bg-secondary/20 rounded-full text-xs">阴阳两仪错纹盘</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 关于作品板块 -->
+    <section id="about" class="py-16 bg-primary/10">
+      <div class="container mx-auto px-4">
+        <div class="max-w-3xl mx-auto bg-white/90 backdrop-blur rounded-lg shadow-lg p-8">
+          <h2 class="text-[clamp(1.8rem,3vw,2.2rem)] font-bold text-primary mb-6">关于《大元梦》</h2>
+
+          <div class="space-y-6">
+            <div>
+              <h3 class="text-xl font-semibold text-dark mb-3">作品简介</h3>
+              <p class="text-gray-700 leading-relaxed">
+                《大元梦》讲述了在大元王朝末期，位于三大势力交界处的元村，两个少年元浩和夜阳
+                在一次偶然的机会中发现了神秘女孩卯卯，从此改变了他们的命运轨迹。随着秘境通道的开启，
+                两人分别进入不同的修行之地，开始了各自的成长之路。作品围绕着通灵元丹的争夺、
+                卯卯的身世之谜、三大势力的纷争等展开，描绘了一个充满奇幻色彩的武侠世界。
+                作者特别强调，故事中的人物没有不死之身和主角光环，而是"草木皆兵"的普通少年，
+                他们在乱世中凭借善良、勇气和智慧成长。
+              </p>
+            </div>
+
+            <div>
+              <h3 class="text-xl font-semibold text-dark mb-3">创作理念</h3>
+              <p class="text-gray-700 leading-relaxed">
+                作者希望创造的不是拥有不死之身和主角光环的完美英雄，而是有血有肉、
+                有优点也有缺点的普通人。在乱世之中，他们凭借着自己的善良、勇气和智慧，
+                面对各种挑战和抉择，最终成长为能够独当一面的人物。作品强调友情、亲情、
+                正义与担当，探讨了规则与自由、公平与正义等深刻主题。
+                故事中的每个角色都有自己的弱点和成长空间，让读者能够产生更强的共鸣。
+              </p>
+            </div>
+
+            <div>
+              <h3 class="text-xl font-semibold text-dark mb-3">核心设定</h3>
+              <ul class="text-gray-700 space-y-2 list-disc pl-6">
+                <li>世界观：大元王朝末期，三大势力（武当国、封山郡、蛮族）鼎立，实力为尊</li>
+                <li>核心道具：通灵元丹（提升实力的至宝）、元石（修行能量石）、神秘古盘（占卜工具）</li>
+                <li>核心地点：元村（主角出生地）、秘境通道（修行入口）、清风镇（秘境考验地）、秀林镇（封山郡修行地）</li>
+                <li>人物设定：无主角光环，角色有血有肉，注重成长与蜕变</li>
+                <li>主题思想：友情、亲情、正义、担当、规则与自由、公平与正义</li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 class="text-xl font-semibold text-dark mb-3">更新计划</h3>
+              <ul class="text-gray-700 space-y-2 list-disc pl-6">
+                <li>每周更新1-2章，确保内容质量</li>
+                <li>预计总章节数：50章左右</li>
+                <li>分为三个部分：元村篇、修行篇、揭秘篇</li>
+                <li>后续将推出人物番外和世界观扩展内容</li>
+                <li>未来剧情将围绕卯卯身世、通灵元丹真相、三大势力最终对决展开</li>
+              </ul>
+            </div>
+
+            <div class="pt-4 border-t border-gray-200">
+              <h3 class="text-xl font-semibold text-dark mb-3">作者寄语</h3>
+              <p class="text-gray-700 leading-relaxed italic">
+                "每个少年心中都有一个武侠梦，每个时代都需要英雄的出现。《大元梦》
+                不仅仅是一个奇幻故事，更是一段关于成长、友情和担当的旅程。希望读者
+                能够在这个故事中找到共鸣，感受到那份来自乱世之中的温暖与力量。
+                我不想写完美的英雄，只想写真实的人——会害怕、会犯错、会成长的普通人，
+                这就是'草木皆兵'的含义：在乱世中如草木般平凡，却有着坚韧不拔的生命力。"
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="bg-dark text-light py-10">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <h3 class="text-xl font-bold mb-4 flex items-center">
+            <<i class="fa fa-book text-secondary mr-2">
+              </< /i>大元梦
+          </h3>
+          <p class="text-xl font-bold mb-4 flex items-center">
+            消亡前的传说，一段关于成长、友情和担当的奇幻旅程
+          </p>
+          <div class="flex space-x-4">
+            <a href="#" class="text-gray-400 hover:text-secondary transition-colors duration-200">
+              <<i class="fa fa-weibo text-xl">
+                </< /i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-secondary transition-colors duration-200">
+              <<i class="fa fa-wechat text-xl">
+                </< /i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-secondary transition-colors duration-200">
+              <<i class="fa fa-qq text-xl">
+                </< /i>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-4">快速导航</h3>
+          <ul class="space-y-2">
+            <li><a href="#home" class="text-gray-400 hover:text-secondary transition-colors duration-200">首页</a></li>
+            <li><a href="#story" class="text-gray-400 hover:text-secondary transition-colors duration-200">小说正文</a></li>
+            <li><a href="#characters" class="text-gray-400 hover:text-secondary transition-colors duration-200">人物介绍</a>
+            </li>
+            <li><a href="#world" class="text-gray-400 hover:text-secondary transition-colors duration-200">世界观</a></li>
+            <li><a href="#about" class="text-gray-400 hover:text-secondary transition-colors duration-200">关于作品</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold mb-4">联系我们</h3>
+          <ul class="space-y-2 text-gray-400">
+            <li class="flex items-center">
+              <<i class="fa fa-envelope-o mr-2">
+                </< /i>
+                <span>contact@dayuanmeng.com</span>
+            </li>
+            <li class="flex items-center">
+              <<i class="fa fa-phone mr-2">
+                </< /i>
+                <span>000-0000-000</span>
+            </li>
+            <li class="flex items-center">
+              <<i class="fa fa-map-marker mr-2">
+                </< /i>
+                <span>五哈离宫留三菱委员会</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-8 pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
+        <p>© 2025 大元梦 版权所有 | 鲁备12345678号</p>
+        <p class="mt-2">本网站仅用于展示《大元梦》小说内容，请勿用于商业用途</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 回到顶部按钮 -->
+  <button id="backToTop"
+    class="fixed bottom-6 right-6 bg-primary text-light w-12 h-12 rounded-full flex items-center justify-center shadow-lg opacity-0 invisible transition-all duration-300 hover:bg-primary/90">
+    <<i class="fa fa-angle-up text-xl">
+      </< /i>
+  </button>
+
+  <!-- 字体大小切换按钮 -->
+  <button
+    class="fixed top-24 right-4 bg-primary/90 text-light px-3 py-2 rounded-md shadow-lg hover:bg-primary transition-colors duration-200 z-40">
+    <<i class="fa fa-text-height mr-1">
+      </< /i> 调整字体大小
+  </button>
+
+  <!-- JavaScript -->
+  <script>
+    // 移动端菜单切换
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      if (mobileMenu.classList.contains('hidden')) {
+        menuBtn.innerHTML = '<<i class="fa fa-bars"></</i>';
+      } else {
+        menuBtn.innerHTML = '<<i class="fa fa-times"></</i>';
+      }
+    });
+
+    // 平滑滚动
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        // 关闭移动端菜单
+        if (!mobileMenu.classList.contains('hidden')) {
+          mobileMenu.classList.add('hidden');
+          menuBtn.innerHTML = '<<i class="fa fa-bars"></</i>';
+        }
+
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // 回到顶部按钮
+    const backToTopBtn = document.getElementById('backToTop');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTopBtn.classList.remove('opacity-0', 'invisible');
+        backToTopBtn.classList.add('opacity-100', 'visible');
+      } else {
+        backToTopBtn.classList.add('opacity-0', 'invisible');
+        backToTopBtn.classList.remove('opacity-100', 'visible');
+      }
+    });
+
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    // 章节导航激活状态
+    const chapterLinks = document.querySelectorAll('#story .lg\\:w-1\\/4 a');
+    const chapters = document.querySelectorAll('#story article');
+
+    window.addEventListener('scroll', () => {
+      let currentChapter = '';
+
+      chapters.forEach(chapter => {
+        const chapterTop = chapter.offsetTop - 100;
+        const chapterHeight = chapter.offsetHeight;
+
+        if (window.scrollY >= chapterTop && window.scrollY < chapterTop + chapterHeight) {
+          currentChapter = chapter.getAttribute('id');
+        }
+      });
+
+      chapterLinks.forEach(link => {
+        link.classList.remove('bg-secondary/10', 'text-primary', 'font-medium');
+
+        if (link.getAttribute('href') === `#${currentChapter}`) {
+          link.classList.add('bg-secondary/10', 'text-primary', 'font-medium');
+        }
+      });
+    });
+
+    // 阅读模式优化 - 字体大小切换
+    const toggleFontSize = () => {
+      const content = document.querySelector('#story .prose');
+      const currentFontSize = window.getComputedStyle(content).fontSize;
+
+      if (currentFontSize === '15px') {
+        content.style.fontSize = '17px';
+        alert('字体已调整为中等大小');
+      } else if (currentFontSize === '17px') {
+        content.style.fontSize = '19px';
+        alert('字体已调整为大号');
+      } else {
+        content.style.fontSize = '15px';
+        alert('字体已调整为默认大小');
+      }
+    };
+
+    // 绑定字体大小切换按钮事件
+    document.querySelector('.fixed.top-24.right-4').addEventListener('click', toggleFontSize);
+  </script>
+</body>
+
+</html>
